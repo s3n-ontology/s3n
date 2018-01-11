@@ -1,0 +1,138 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix schema: <http://schema.org/>.
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+
+@prefix s3n: <http://w3id.org/s3n/> .
+
+
+foaf:Agent a owl:Class .
+foaf:name a owl:AnnotationProperty .
+voaf:Vocabulary a owl:Class .
+dcterms:title a owl:AnnotationProperty .
+dcterms:description a owl:AnnotationProperty .
+dcterms:rights a owl:AnnotationProperty .
+dcterms:license a owl:AnnotationProperty .
+dcterms:created a owl:AnnotationProperty .
+dcterms:creator a owl:AnnotationProperty .
+skos:definition a owl:AnnotationProperty .
+skos:example a owl:AnnotationProperty .
+skos:note a owl:AnnotationProperty .
+vann:preferredNamespacePrefix a owl:AnnotationProperty .
+vann:preferredNamespaceUri a owl:AnnotationProperty .
+schema:domainIncludes a owl:AnnotationProperty .
+schema:rangeIncludes a owl:AnnotationProperty .
+time:TemporalEntity a owl:Class .
+
+
+s3n:S3NProcedure a owl:Ontology , voaf:Vocabulary ;
+  dcterms:title "Semantic Smart Sensor Network (S3N) Ontology: Algorithm Module"@en ;
+  dcterms:description "This ontology extends the S3N-Core Ontology and the OGC/W3C SSN-System ontology to describe SystemCapabilities relevant for MicroControllers and CommunicatingSystems, along with AlgorithmFeatures in certain conditions."@en ;
+  dcterms:creator <http://maxime-lefrancois.info/me#> ;
+  dcterms:creator [ a foaf:Agent ; foaf:name "Samya Sagar"@en ] ;
+  dcterms:license <https://www.apache.org/licenses/LICENSE-2.0> ;
+  dcterms:created "2018-01-11"^^xsd:date ;
+  owl:imports ssn-system: , s3n:S3NCore ;
+  vann:preferredNamespacePrefix "s3n" ;
+  vann:preferredNamespaceUri "http://w3id.org/s3n/" .
+
+<http://maxime-lefrancois.info/me#> a foaf:Agent ; foaf:name "Maxime Lefrançois"@en .
+
+
+# SystemProperties for micro-controllers
+
+s3n:Memory a owl:Class ;
+  rdfs:label "Memory"@en ;
+  skos:definition "The memory of the micro-controller under the defined Conditions."@en ;
+  rdfs:subClassOf ssn-system:SystemProperty ;
+  rdfs:subClassOf [ a owl:Restriction ; owl:onProperty [ owl:inverseOf ssn-system:hasSystemProperty ] ; owl:allValuesFrom [ a owl:Restriction ; owl:onProperty [ owl:inverseOf s3n:hasSystemCapability ] ; owl:allValuesFrom s3n:MicroController ] ] ; 
+  rdfs:isDefinedBy s3n:S3NProcedure .
+
+
+    ### to be augmented
+
+
+# SystemProperties for communicating systems
+
+s3n:MaximumBandwidth a owl:Class ;
+  rdfs:label "Maximum Bandwidth"@en ;
+  skos:definition "The maximal bandwidth of the communicating device under the defined Conditions."@en ;
+  rdfs:subClassOf ssn-system:SystemProperty ;
+  rdfs:subClassOf [ a owl:Restriction ; owl:onProperty [ owl:inverseOf ssn-system:hasSystemProperty ] ; owl:allValuesFrom [ a owl:Restriction ; owl:onProperty [ owl:inverseOf s3n:hasSystemCapability ] ; owl:allValuesFrom s3n:CommunicatingSystem ] ] ; 
+  rdfs:isDefinedBy s3n:S3NProcedure .
+
+    ### to be augmented
+
+
+# Procedure
+
+sosa:Procedure 
+  rdfs:subClassOf [ a owl:Restriction ; owl:onProperty s3n:hasProcedureFeature ; owl:allValuesFrom s3n:ProcedureFeature ] ;
+  rdfs:isDefinedBy sosa: .
+
+
+## Procedure Features
+
+s3n:hasProcedureFeature a owl:ObjectProperty ;
+  rdfs:label "has procedure feature"@en ;
+  skos:definition "Relation from a Procedure to a SystemCapability describing the capabilities of the System under certain Conditions."@en ;
+  rdfs:subPropertyOf ssn:hasProperty ;
+  rdfs:isDefinedBy s3n:S3NProcedure .
+
+
+  s3n:ProcedureFeature a owl:Class ;
+    rdfs:label "Procedure Feature"@en ;
+    skos:definition """Describes procedure properties such as the duration, computational cost, storage cost, etc. of a Procedure under some specified Conditions such as a size of input.
+
+    The features specified here are those that affect the Procedure executions."""@en ;
+    rdfs:subClassOf ssn:Property ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty s3n:hasProcedureProperty ; owl:allValuesFrom s3n:ProcedureProperty ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty ssn-system:inCondition ; owl:minCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty ssn-system:inCondition ; owl:allValuesFrom ssn-system:Condition ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty [ owl:inverseOf s3n:hasProcedureFeature ] ; owl:allValuesFrom s3n:Algorithm ] ;
+    rdfs:isDefinedBy s3n:S3NProcedure .
+
+  s3n:hasProcedureProperty a owl:ObjectProperty ;
+    rdfs:label "has procedure property"@en ;
+    skos:definition "Relation from an ProcedureFeature of a Procedure to a ProcedureProperty describing the features of the Procedure."@en ;
+    rdfs:subPropertyOf ssn:hasProperty ;
+    rdfs:isDefinedBy s3n:S3NProcedure .
+
+  s3n:ProcedureProperty a owl:Class ;
+    rdfs:label "Procedure Property"@en ;
+    skos:definition "An identifiable characteristic that represents typical characteristics of the Procedure's executions."@en ;
+    rdfs:subClassOf ssn:Property ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty [ owl:inverseOf s3n:hasProcedureProperty ] ; owl:minCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty [ owl:inverseOf s3n:hasProcedureProperty ] ; owl:allValuesFrom s3n:ProcedureFeature ] ;
+    rdfs:isDefinedBy s3n:S3NProcedure .
+
+    s3n:TimeComplexity a owl:Class ;
+      rdfs:label "Time Complexity"@en ;
+      skos:definition "The complexity in time of the Procedure under under the defined Conditions."@en ;
+      rdfs:subClassOf s3n:ProcedureProperty ;
+      rdfs:subClassOf [ a owl:Restriction ; owl:onProperty [ owl:inverseOf s3n:hasProcedureProperty  ] ; owl:allValuesFrom [ a owl:Restriction ; owl:onProperty [ owl:inverseOf s3n:hasProcedureFeature ] ; owl:allValuesFrom s3n:Algorithm ] ] ; 
+      rdfs:isDefinedBy s3n:S3NProcedure .
+
+    s3n:SpaceComplexity a owl:Class ;
+      rdfs:label "Space Complexity"@en ;
+      skos:definition "The complexity in space of the Procedure under under the defined Conditions."@en ;
+      rdfs:subClassOf s3n:ProcedureProperty ;
+      rdfs:subClassOf [ a owl:Restriction ; owl:onProperty [ owl:inverseOf s3n:hasProcedureProperty  ] ; owl:allValuesFrom [ a owl:Restriction ; owl:onProperty [ owl:inverseOf s3n:hasProcedureFeature ] ; owl:allValuesFrom s3n:Algorithm ] ] ; 
+      rdfs:isDefinedBy s3n:S3NProcedure .
+
+    s3n:ComputationalCost a owl:Class ;
+      rdfs:label "Computational Cost"@en ;
+      skos:definition "The computational cost of the Procedure under under the defined Conditions."@en ;
+      rdfs:subClassOf s3n:ProcedureProperty ;
+      rdfs:isDefinedBy s3n:S3NProcedure .
+

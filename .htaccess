@@ -1,0 +1,54 @@
+Options +MultiViews
+RewriteEngine On
+RewriteBase  /s3n/
+DirectoryIndex s3n
+
+AddType text/html html
+AddType text/turtle ttl
+AddType application/rdf+xml rdf
+
+<Files ~ "s3n\.rdf$">
+     Header set Content-Disposition "inline; filename=s3n.rdf"
+</Files>
+<Files ~ "s3n\.ttl$">
+     Header set Content-Disposition "inline; filename=s3n.ttl"
+</Files>
+<Files ~ "s3n\.html$">
+     Header set Content-Disposition "inline; filename=s3n.html"
+</Files>
+
+<Files ~ "S3NCore\.rdf$">
+     Header set Content-Disposition "inline; filename=S3NCore.rdf"
+</Files>
+<Files ~ "S3NCore\.ttl$">
+     Header set Content-Disposition "inline; filename=S3NCore.ttl"
+</Files>
+
+<Files ~ "S3NProcedure\.rdf$">
+     Header set Content-Disposition "inline; filename=S3NProcedure.rdf"
+</Files>
+<Files ~ "S3NProcedure\.ttl$">
+     Header set Content-Disposition "inline; filename=S3NProcedure.ttl"
+</Files>
+
+<Files ~ "S3NThing\.rdf$">
+     Header set Content-Disposition "inline; filename=S3NThing.rdf"
+</Files>
+<Files ~ "S3NThing\.ttl$">
+     Header set Content-Disposition "inline; filename=S3NThing.ttl"
+</Files>
+
+
+RewriteCond  %{REQUEST_URI} /s3n/(Indicator|MicroController|CommunicatingSystem|SmartSensor|Algorithm|forContext|AlgorithmExecution|madeAlgorithmExecution|Error|cause|Memory|MaximumBandwidth|hasProcedureFeature|ProcedureFeature|hasProcedureProperty|ProcedureProperty|TimeComplexity|SpaceComplexity|ComputationalCost)$
+RewriteCond  %{HTTP_ACCEPT}  text/html
+RewriteRule  ^(.*)$  /s3n/s3n.html#$1 [R=303,NE,env=redirect:1]
+
+RewriteCond  %{REQUEST_URI} /s3n/(Indicator|MicroController|CommunicatingSystem|SmartSensor|Algorithm|forContext|AlgorithmExecution|madeAlgorithmExecution|Error|cause)$
+RewriteCond  %{HTTP_ACCEPT}  !text/html
+RewriteRule  ^(.*)$  /s3n/S3NCore [R=303,env=redirect:1]
+
+RewriteCond  %{REQUEST_URI} /s3n/(Memory|MaximumBandwidth|hasProcedureFeature|ProcedureFeature|hasProcedureProperty|ProcedureProperty|TimeComplexity|SpaceComplexity|ComputationalCost)$
+RewriteCond  %{HTTP_ACCEPT}  !text/html
+RewriteRule  ^(.*)$  /s3n/S3NProcedure [R=303,env=redirect:1]
+
+Header always merge Vary "Accept" env=redirect
