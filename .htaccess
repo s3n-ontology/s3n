@@ -4,8 +4,8 @@ RewriteBase  /s3n/
 DirectoryIndex s3n
 
 AddType text/html html
-AddType text/turtle ttl
 AddType application/rdf+xml rdf
+AddType text/turtle ttl
 
 <Files ~ "s3n\.rdf$">
      Header set Content-Disposition "inline; filename=s3n.rdf"

@@ -1,1 +1,454 @@
-RDFXML version of S3NProcedure, to be added.
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://w3id.org/s3n/S3NProcedure#"
+     xml:base="http://w3id.org/s3n/S3NProcedure"
+     xmlns:schema="http://schema.org/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:voaf="http://purl.org/vocommons/voaf#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:s3n="http://w3id.org/s3n/"
+     xmlns:ssn="http://www.w3.org/ns/ssn/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:dcterms="http://purl.org/dc/terms/"
+     xmlns:time="http://www.w3.org/2006/time#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:ssn-system="http://www.w3.org/ns/ssn/systems/"
+     xmlns:sosa="http://www.w3.org/ns/sosa/">
+    <owl:Ontology rdf:about="http://w3id.org/s3n/S3NProcedure">
+        <owl:imports rdf:resource="http://w3id.org/s3n/S3NCore"/>
+        <owl:imports rdf:resource="http://www.w3.org/ns/ssn/systems/"/>
+        <dcterms:title xml:lang="en">Semantic Smart Sensor Network (S3N) Ontology: Algorithm Module</dcterms:title>
+        <dcterms:creator rdf:resource="http://maxime-lefrancois.info/me#"/>
+        <dcterms:creator>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+                <foaf:name xml:lang="en">Samya Sagar</foaf:name>
+            </rdf:Description>
+        </dcterms:creator>
+        <dcterms:description xml:lang="en">This ontology extends the S3N-Core Ontology and the OGC/W3C SSN-System ontology to describe SystemCapabilities relevant for MicroControllers and CommunicatingSystems, along with AlgorithmFeatures in certain conditions.</dcterms:description>
+        <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-01-11</dcterms:created>
+        <vann:preferredNamespacePrefix>s3n</vann:preferredNamespacePrefix>
+        <vann:preferredNamespaceUri>http://w3id.org/s3n/</vann:preferredNamespaceUri>
+        <dcterms:license rdf:resource="https://www.apache.org/licenses/LICENSE-2.0"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/created -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/created"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/license -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/rights -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/rights"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespacePrefix -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespaceUri -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
+    
+
+
+    <!-- http://schema.org/domainIncludes -->
+
+    <owl:AnnotationProperty rdf:about="http://schema.org/domainIncludes"/>
+    
+
+
+    <!-- http://schema.org/rangeIncludes -->
+
+    <owl:AnnotationProperty rdf:about="http://schema.org/rangeIncludes"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#definition -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#example -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#example"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#note -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#note"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/name -->
+
+    <owl:AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/name"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://w3id.org/s3n/hasProcedureFeature -->
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/s3n/hasProcedureFeature">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/ns/ssn/hasProperty"/>
+        <rdfs:isDefinedBy rdf:resource="http://w3id.org/s3n/S3NProcedure"/>
+        <rdfs:label xml:lang="en">has procedure feature</rdfs:label>
+        <skos:definition xml:lang="en">Relation from a Procedure to a SystemCapability describing the capabilities of the System under certain Conditions.</skos:definition>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/s3n/hasProcedureProperty -->
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/s3n/hasProcedureProperty">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/ns/ssn/hasProperty"/>
+        <rdfs:isDefinedBy rdf:resource="http://w3id.org/s3n/S3NProcedure"/>
+        <rdfs:label xml:lang="en">has procedure property</rdfs:label>
+        <skos:definition xml:lang="en">Relation from an ProcedureFeature of a Procedure to a ProcedureProperty describing the features of the Procedure.</skos:definition>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/s3n/hasSystemCapability -->
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/s3n/hasSystemCapability"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/vocommons/voaf#Vocabulary -->
+
+    <owl:Class rdf:about="http://purl.org/vocommons/voaf#Vocabulary"/>
+    
+
+
+    <!-- http://w3id.org/s3n/ComputationalCost -->
+
+    <owl:Class rdf:about="http://w3id.org/s3n/ComputationalCost">
+        <rdfs:subClassOf rdf:resource="http://w3id.org/s3n/ProcedureProperty"/>
+        <rdfs:isDefinedBy rdf:resource="http://w3id.org/s3n/S3NProcedure"/>
+        <rdfs:label xml:lang="en">Computational Cost</rdfs:label>
+        <skos:definition xml:lang="en">The computational cost of the Procedure under under the defined Conditions.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/s3n/MaximumBandwidth -->
+
+    <owl:Class rdf:about="http://w3id.org/s3n/MaximumBandwidth">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/ssn/systems/SystemProperty"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://www.w3.org/ns/ssn/systems/hasSystemProperty"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://w3id.org/s3n/hasSystemCapability"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:allValuesFrom rdf:resource="http://w3id.org/s3n/CommunicatingSystem"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://w3id.org/s3n/S3NProcedure"/>
+        <rdfs:label xml:lang="en">Maximum Bandwidth</rdfs:label>
+        <skos:definition xml:lang="en">The maximal bandwidth of the communicating device under the defined Conditions.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/s3n/Memory -->
+
+    <owl:Class rdf:about="http://w3id.org/s3n/Memory">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/ssn/systems/SystemProperty"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://www.w3.org/ns/ssn/systems/hasSystemProperty"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://w3id.org/s3n/hasSystemCapability"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:allValuesFrom rdf:resource="http://w3id.org/s3n/MicroController"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://w3id.org/s3n/S3NProcedure"/>
+        <rdfs:label xml:lang="en">Memory</rdfs:label>
+        <skos:definition xml:lang="en">The memory of the micro-controller under the defined Conditions.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/s3n/ProcedureFeature -->
+
+    <owl:Class rdf:about="http://w3id.org/s3n/ProcedureFeature">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/ssn/Property"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://w3id.org/s3n/hasProcedureProperty"/>
+                <owl:allValuesFrom rdf:resource="http://w3id.org/s3n/ProcedureProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/ssn/systems/inCondition"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/systems/Condition"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://w3id.org/s3n/hasProcedureFeature"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:allValuesFrom rdf:resource="http://w3id.org/s3n/Algorithm"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/ssn/systems/inCondition"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://w3id.org/s3n/S3NProcedure"/>
+        <rdfs:label xml:lang="en">Procedure Feature</rdfs:label>
+        <skos:definition xml:lang="en">Describes procedure properties such as the duration, computational cost, storage cost, etc. of a Procedure under some specified Conditions such as a size of input.
+
+    The features specified here are those that affect the Procedure executions.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/s3n/ProcedureProperty -->
+
+    <owl:Class rdf:about="http://w3id.org/s3n/ProcedureProperty">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/ssn/Property"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://w3id.org/s3n/hasProcedureProperty"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:allValuesFrom rdf:resource="http://w3id.org/s3n/ProcedureFeature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://w3id.org/s3n/hasProcedureProperty"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://w3id.org/s3n/S3NProcedure"/>
+        <rdfs:label xml:lang="en">Procedure Property</rdfs:label>
+        <skos:definition xml:lang="en">An identifiable characteristic that represents typical characteristics of the Procedure&apos;s executions.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/s3n/SpaceComplexity -->
+
+    <owl:Class rdf:about="http://w3id.org/s3n/SpaceComplexity">
+        <rdfs:subClassOf rdf:resource="http://w3id.org/s3n/ProcedureProperty"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://w3id.org/s3n/hasProcedureProperty"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://w3id.org/s3n/hasProcedureFeature"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:allValuesFrom rdf:resource="http://w3id.org/s3n/Algorithm"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://w3id.org/s3n/S3NProcedure"/>
+        <rdfs:label xml:lang="en">Space Complexity</rdfs:label>
+        <skos:definition xml:lang="en">The complexity in space of the Procedure under under the defined Conditions.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/s3n/TimeComplexity -->
+
+    <owl:Class rdf:about="http://w3id.org/s3n/TimeComplexity">
+        <rdfs:subClassOf rdf:resource="http://w3id.org/s3n/ProcedureProperty"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://w3id.org/s3n/hasProcedureProperty"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://w3id.org/s3n/hasProcedureFeature"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:allValuesFrom rdf:resource="http://w3id.org/s3n/Algorithm"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://w3id.org/s3n/S3NProcedure"/>
+        <rdfs:label xml:lang="en">Time Complexity</rdfs:label>
+        <skos:definition xml:lang="en">The complexity in time of the Procedure under under the defined Conditions.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2006/time#TemporalEntity -->
+
+    <owl:Class rdf:about="http://www.w3.org/2006/time#TemporalEntity"/>
+    
+
+
+    <!-- http://www.w3.org/ns/sosa/Procedure -->
+
+    <rdf:Description rdf:about="http://www.w3.org/ns/sosa/Procedure">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://w3id.org/s3n/hasProcedureFeature"/>
+                <owl:allValuesFrom rdf:resource="http://w3id.org/s3n/ProcedureFeature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/sosa/"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Agent -->
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Agent"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://maxime-lefrancois.info/me# -->
+
+    <rdf:Description rdf:about="http://maxime-lefrancois.info/me#">
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <foaf:name xml:lang="en">Maxime Lefrançois</foaf:name>
+    </rdf:Description>
+    
+
+
+    <!-- http://w3id.org/s3n/S3NProcedure -->
+
+    <owl:NamedIndividual rdf:about="http://w3id.org/s3n/S3NProcedure">
+        <rdf:type rdf:resource="http://purl.org/vocommons/voaf#Vocabulary"/>
+    </owl:NamedIndividual>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <foaf:name xml:lang="en">Samya Sagar</foaf:name>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi -->
+
