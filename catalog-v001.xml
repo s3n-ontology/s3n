@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1515708105665" name="http://w3id.org/s3n/" uri="s3n.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1515708105665" name="http://w3id.org/s3n/S3NCore" uri="S3NCore.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1515708105665" name="http://w3id.org/s3n/S3NProcedure" uri="S3NProcedure.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1515708105665" name="http://w3id.org/s3n/S3NThing" uri="S3NThing.rdf"/>
+    </group>
+</catalog>

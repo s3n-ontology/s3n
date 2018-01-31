@@ -1,1 +1,1473 @@
-HTML documentation, to be added
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Semantic Smart Sensor Network Ontology</title>
+    <script type="text/javascript" src="https://gc.kis.scr.kaspersky-labs.com/1B74BD89-2A22-4B93-B451-1C9E1052A0EC/main.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="https://www.w3.org/2007/OWL/toggles.js"></script>
+	<link rel="stylesheet" type="text/css" href="base.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="small.css" media="only all and (max-width: 649px)">
+
+	<meta name="generator" content="ReSpec 17.0.0">
+    <meta name="description" content="The Semantic Smart Sensor Network (S3N) Ontology, combines the OGC and W3C
+		SOSA/SSN standard and the W3C TD future standard to describe the architecture
+		of Smart-Sensors, the algorithms they can execute and the indicator values
+		they output, the features of these algorithms and the capabilities of the different
+		components, and the patterns one may use to interact with the Smart-Sensors.">
+	<style id="respec-mainstyle">
+        /*****************************************************************
+ * ReSpec 3 CSS
+ *****************************************************************/
+        /* Override code highlighter background */
+
+        .hljs {
+            background: transparent !important;
+        }
+        /* --- INLINES --- */
+
+        h1 abbr,
+        h2 abbr,
+        h3 abbr,
+        h4 abbr,
+        h5 abbr,
+        h6 abbr,
+        a abbr {
+            border: none;
+        }
+
+        dfn {
+            font-weight: bold;
+        }
+
+        a.internalDFN {
+            color: inherit;
+            border-bottom: 1px solid #99c;
+            text-decoration: none;
+        }
+
+        a.externalDFN {
+            color: inherit;
+            border-bottom: 1px dotted #ccc;
+            text-decoration: none;
+        }
+
+        a.bibref {
+            text-decoration: none;
+        }
+
+        cite .bibref {
+            font-style: normal;
+        }
+
+        code {
+            color: #c83500;
+        }
+
+        th code {
+            color: inherit;
+        }
+        /* --- TOC --- */
+
+        .toc a,
+        .tof a {
+            text-decoration: none;
+        }
+
+        a .secno,
+        a .figno {
+            color: #000;
+        }
+
+        ul.tof,
+        ol.tof {
+            list-style: none outside none;
+        }
+
+        .caption {
+            margin-top: 0.5em;
+            font-style: italic;
+        }
+        /* --- TABLE --- */
+
+        table.simple {
+            border-spacing: 0;
+            border-collapse: collapse;
+            border-bottom: 3px solid #005a9c;
+        }
+
+        .simple th {
+            background: #005a9c;
+            color: #fff;
+            padding: 3px 5px;
+            text-align: left;
+        }
+
+        .simple th[scope="row"] {
+            background: inherit;
+            color: inherit;
+            border-top: 1px solid #ddd;
+        }
+
+        .simple td {
+            padding: 3px 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .simple tr:nth-child(even) {
+            background: #f0f6ff;
+        }
+        /* --- DL --- */
+
+        .section dd>p:first-child {
+            margin-top: 0;
+        }
+
+        .section dd>p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section dd {
+            margin-bottom: 1em;
+        }
+
+        .section dl.attrs dd,
+        .section dl.eldef dd {
+            margin-bottom: 0;
+        }
+
+        #issue-summary>ul,
+        .respec-dfn-list {
+            column-count: 2;
+        }
+
+        #issue-summary li,
+        .respec-dfn-list li {
+            list-style: none;
+        }
+
+        details.respec-tests-details {
+            margin-left: 1em;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        details.respec-tests-details>* {
+            padding-right: 2em;
+        }
+
+        details.respec-tests-details[open] {
+            z-index: 999999;
+            position: absolute;
+            border: thin solid #cad3e2;
+            border-radius: .3em;
+            background-color: white;
+            padding-bottom: .5em;
+        }
+
+        details.respec-tests-details[open]>summary {
+            border-bottom: thin solid #cad3e2;
+            padding-left: 1em;
+            margin-bottom: 1em;
+            line-height: 2em;
+        }
+
+        details.respec-tests-details>ul {
+            width: 100%;
+            margin-top: -0.3em;
+        }
+
+        details.respec-tests-details>li {
+            padding-left: 1em;
+        }
+
+        @media print {
+            .removeOnSave {
+                display: none;
+            }
+        }
+    </style>
+    <style>
+        /*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+        .hljs {
+            display: block;
+            overflow-x: auto;
+            padding: 0.5em;
+            color: #333;
+            background: #f8f8f8;
+        }
+
+        .hljs-comment,
+        .hljs-quote {
+            color: #998;
+            font-style: italic;
+        }
+
+        .hljs-keyword,
+        .hljs-selector-tag,
+        .hljs-subst {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .hljs-number,
+        .hljs-literal,
+        .hljs-variable,
+        .hljs-template-variable,
+        .hljs-tag .hljs-attr {
+            color: #008080;
+        }
+
+        .hljs-string,
+        .hljs-doctag {
+            color: #d14;
+        }
+
+        .hljs-title,
+        .hljs-section,
+        .hljs-selector-id {
+            color: #900;
+            font-weight: bold;
+        }
+
+        .hljs-subst {
+            font-weight: normal;
+        }
+
+        .hljs-type,
+        .hljs-class .hljs-title {
+            color: #458;
+            font-weight: bold;
+        }
+
+        .hljs-tag,
+        .hljs-name,
+        .hljs-attribute {
+            color: #000080;
+            font-weight: normal;
+        }
+
+        .hljs-regexp,
+        .hljs-link {
+            color: #009926;
+        }
+
+        .hljs-symbol,
+        .hljs-bullet {
+            color: #990073;
+        }
+
+        .hljs-built_in,
+        .hljs-builtin-name {
+            color: #0086b3;
+        }
+
+        .hljs-meta {
+            color: #999;
+            font-weight: bold;
+        }
+
+        .hljs-deletion {
+            background: #fdd;
+        }
+
+        .hljs-addition {
+            background: #dfd;
+        }
+
+        .hljs-emphasis {
+            font-style: italic;
+        }
+
+        .hljs-strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# skos: http://www.w3.org/2004/02/skos/core# dcterms: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/>. vann: http://purl.org/vocab/vann/ voaf: http://purl.org/vocommons/voaf# time: http://www.w3.org/2006/time# sosa: http://www.w3.org/ns/sosa/ ssn: http://www.w3.org/ns/ssn/ ssn-system: http://www.w3.org/ns/ssn/systems/  sampling: http://www.w3.org/ns/sosa/sampling/ vs: http://www.w3.org/2003/06/sw-vocab-status/ns# td: http://www.w3.org/ns/td#/ s3n: https://w3id.org/s3n/" 
+    aria-busy="false" class="h-entry" id="respecDocument">
+
+	<div class="head" role="contentinfo" id="respecHeader">
+
+        <h1 class="title p-name" id="title">Semantic Smart Sensor Network Ontology</h1>
+        <h2 id="S3N-January-2018"><abbr title="Semantic Smart Sensor Network">S3N</abbr> - January 2018 </h2>
+            <dl>
+                <dt>This version:</dt>
+                <dd><a class="u-url" href="https://w3id.org/s3n/">https://w3id.org/s3n/</a></dd>
+                <dt>Editors:</dt>
+                <dd class="p-author h-card vcard"><span class="p-name fn">Samya Sagar</span>, <a class="p-org org h-org h-card" href="https://www.labsticc.fr/">Lab-STICC IMT Atlantique, Brest, France</a></dd>
+                <dd class="p-author h-card vcard"><span class="p-name fn">Maxime Lefrançois</span>, <a class="p-org org h-org h-card" href="http://www.mines-stetienne.fr/">École Nationale Supérieure des Mines de Saint-Étienne</a></dd>
+           </dl>
+           <dl>
+				<dt>Contributors :</dt>
+				<dd>Issam Rebai, Lab-STICC IMT Atlantique, Brest, France</dd>
+				<dd>Maha Khemaja, University of Sousse , Tunisia</dd>
+				<dd>Serge Garlatti, Lab-STICC IMT Atlantique, Brest, France</dd>
+				<dd>Lionel Médini, LIRIS Université Lyon 1, France</dd>
+				<dd>Jamel Feki, MIRACL Laboratory University Sfax Tunisia</dd>
+				<dt>Repository:</dt>
+                <dd>
+                    <a href="https://github.com/s3n-ontology/s3n">
+                    GitHub
+                    </a>
+                </dd>
+                <dd>
+                    <a href="https://github.com/s3n-ontology/s3n/issues">
+                    Issues
+                    </a>
+                </dd>
+			</dl>
+        <hr title="Separator for header">
+    </div>
+
+	<!--  Abstract  -->
+    <section id="abstract" class="introductory">
+		<h2 id="abstract-0">Abstract</h2>
+			<p>The Semantic Smart Sensor Network (S3N) ontology is an ontology for describing smart sensors, their different 
+			computation and communication profiles, and how different algorithms may be selected and loaded, potentially at runtime. 
+			S3N is modular and is designed on top of the OGC and W3C SOSA/SSN (Sensor, Observation, Sample, and Actuator)/(Semantic Sensor Network) 
+			ontology [<cite><a class="bibref" href="#bib-SOSA/SSN">SOSA/SSN</a></cite>] and the W3C WoT TD (Thing Description) ontology 
+			[<cite><a class="bibref" href="#bib-TD">TD</a></cite>]. S3N ontology and its combine with SOSA/SSN and the TD ontology are described below,
+			</p>
+			<p style="text-align: center;">
+			The namespace for S3N terms is <span class="repeated" style="font-family: courier;"> https://w3id.org/s3n/</span>.<br> 
+			</p>
+			<p style="text-align: center;">
+			The suggested prefix for the S3N namespace is <span class="repeated" style="font-family: courier;">s3n</span>.<br>
+			</p>
+    </section>
+
+	<!-- Table of Contents -->	
+    <nav id="toc">
+        <h2 class="introductory" id="table-of-contents">Table of Contents</h2>
+        <ol class="toc" role="directory">
+            <li class="tocline"><a href="#intro" class="tocxref"><span class="secno">1. </span>Introduction</a>
+                <ol class="toc">
+                    <li class="tocline"><a href="#namespaces" class="tocxref"><span class="secno">1.1 </span>Namespaces</a></li>
+                </ol>
+            </li>
+            <li class="tocline"><a href="#Modularization" class="tocxref"><span class="secno">2. </span>Modularization</a></li>
+            <li class="tocline"><a href="#Axiomatization" class="tocxref"><span class="secno">3. </span>Axiomatization</a>
+                <ol class="toc">
+                    <li class="tocline"><a href="#overview-of-classes-and-properties" class="tocxref"><span class="secno">3.1 </span>Overview of Classes and Properties</a></li>
+                    <!-- table S3N-Core -->
+					<li class="tocline"><a href="#S3NCore" class="tocxref"><span class="secno">3.2 </span>S3N-Core</a>
+                        <ol class="toc">
+                            <li class="tocline"><a href="#S3NCore-overview" class="tocxref"><span class="secno">3.2.1 </span>Overview</a></li>
+                            <li class="tocline"><a href="#S3NCore-specification" class="tocxref"><span class="secno">3.2.2 </span>Specification</a>
+                                <ol class="toc">
+                                    <li class="tocline"><a href="#s3nIndicator" class="tocxref"><span class="secno">3.2.2.1 </span><span class="formerLink">s3n:Indicator</span></a></li>
+                                    <li class="tocline"><a href="#s3nMicroController" class="tocxref"><span class="secno">3.2.2.2 </span><span class="formerLink">s3n:MicroController</span></a></li>
+                                    <li class="tocline"><a href="#s3nCommunicatingSystem" class="tocxref"><span class="secno">3.2.2.3 </span><span class="formerLink">s3n:CommunicatingSystem</span></a></li>
+                                    <li class="tocline"><a href="#s3nSmartSensor" class="tocxref"><span class="secno">3.2.2.4 </span><span class="formerLink">s3n:SmartSensor</span></a></li>
+                                    <li class="tocline"><a href="#s3nAlgorithm" class="tocxref"><span class="secno">3.2.2.5 </span><span class="formerLink">s3n:Algorithm</span></a></li>
+                                    <li class="tocline"><a href="#s3nAlgorithmExecution" class="tocxref"><span class="secno">3.2.2.6 </span><span class="formerLink">s3n:AlgorithmExecution</span></a></li>
+                                    <li class="tocline"><a href="#s3nError" class="tocxref"><span class="secno">3.2.2.7 </span><span class="formerLink">s3n:Error</span></a></li>
+                                    <li class="tocline"><a href="#s3nforContext" class="tocxref"><span class="secno">3.2.2.8 </span><span class="formerLink">s3n:forContext</span></a></li>
+                                    <li class="tocline"><a href="#s3nmadeAlgorithmExecution" class="tocxref"><span class="secno">3.2.2.9 </span><span class="formerLink">s3n:madeAlgorithmExecution</span></a></li>
+                                    <li class="tocline"><a href="#s3ncause" class="tocxref"><span class="secno">3.2.2.10 </span><span class="formerLink">s3n:cause</span></a></li>
+                                  </ol>
+                            </li>
+                        </ol>
+                    </li>
+					<!-- table S3N-Procedure -->                   
+					<li class="tocline"><a href="#S3NProcedure" class="tocxref"><span class="secno">3.3 </span>S3N-Procedure</a>
+                        <ol class="toc">
+                            <li class="tocline"><a href="#S3NProcedure-overview" class="tocxref"><span class="secno">3.3.1 </span>Overview</a></li>
+                            <li class="tocline"><a href="#S3NProcedure-specification" class="tocxref"><span class="secno">3.3.2 </span>Specification</a>
+                                <ol class="toc">
+                                    <li class="tocline"><a href="#s3nMemory" class="tocxref"><span class="secno">3.3.2.1 </span><span class="formerLink">s3n:Memory</span></a></li>
+                                    <li class="tocline"><a href="#s3nMaximumBandwidth" class="tocxref"><span class="secno">3.3.2.2 </span><span class="formerLink">s3n:MaximumBandwidth</span></a></li>
+                                    <li class="tocline"><a href="#s3nProcedureFeature" class="tocxref"><span class="secno">3.3.2.3 </span><span class="formerLink">s3n:ProcedureFeature</span></a></li>
+                                    <li class="tocline"><a href="#s3nProcedureProperty" class="tocxref"><span class="secno">3.3.2.4 </span><span class="formerLink">s3n:ProcedureProperty</span></a></li>
+                                    <li class="tocline"><a href="#s3nTimeComplexity" class="tocxref"><span class="secno">3.3.2.5 </span><span class="formerLink">s3n:TimeComplexity</span></a></li>
+                                    <li class="tocline"><a href="#s3nSpaceComplexity" class="tocxref"><span class="secno">3.3.2.6 </span><span class="formerLink">s3n:SpaceComplexity</span></a></li>
+                                    <li class="tocline"><a href="#s3nComputationalCost" class="tocxref"><span class="secno">3.3.2.7 </span><span class="formerLink">s3n:ComputationalCost</span></a></li>
+									<li class="tocline"><a href="#s3nhasProcedureFeature" class="tocxref"><span class="secno">3.3.2.8 </span><span class="formerLink">s3n:hasProcedureFeature</span></a></li>
+									<li class="tocline"><a href="#s3nhasProcedureProperty" class="tocxref"><span class="secno">3.3.2.9 </span><span class="formerLink">s3n:hasProcedureProperty</span></a></li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+			<!-- table Ontology alignment: S3N-Thing -->
+            <li class="tocline"><a href="#S3NThing" class="tocxref"><span class="secno">4. </span>Ontology alignment: S3N-Thing</a>
+                <ol class="toc">
+				   <li class="tocline"><a href="#alignment-between-SSN-and-TD" class="tocxref"><span class="secno">4.1 </span>Alignment between SSN and TD</a>
+                        <ol class="toc">
+                            <li class="tocline"><a href="#SSN-TD_Alignment-namespaces" class="tocxref"><span class="secno">4.1.1 </span>Namespaces</a></li>
+                            <li class="tocline"><a href="#SSN-TD-Classes-Alignment" class="tocxref"><span class="secno">4.1.2 </span>Class Alignments</a></li>
+                            <li class="tocline"><a href="#SSN-TD_Alignment_property" class="tocxref"><span class="secno">4.1.3 </span>Property Alignments</a></li>
+                        </ol>
+                    </li>
+                    <li class="tocline"><a href="#alignment-between-S3NCore-and-TD" class="tocxref"><span class="secno">4.2 </span>Alignment between S3N-Core and TD</a>
+                        <ol class="toc">
+                            <li class="tocline"><a href="#S3NCore-TD_Alignment-namespaces" class="tocxref"><span class="secno">4.2.1 </span>Namespaces</a></li>
+                            <li class="tocline"><a href="#S3NCore-TD-Classes-Alignment" class="tocxref"><span class="secno">4.2.2 </span>Class Alignments</a></li>                          
+                        </ol>
+                    </li>  
+                </ol>
+            </li>
+			<!-- References -->
+			<li class="tocline"><a href="#references" class="tocxref"><span class="secno">A. </span>References</a>
+            </li>
+        </ol>
+    </nav>
+	
+<!-- Introduction -->	
+    <section id="intro" class="informative">
+        <h2 id="x1-introduction"><span class="secno">1. </span>Introduction</h2>
+        <p>Thanks to the considerable progress in electronics and communication technology, 
+		the number of sensors embedded in everyday objects has greatly increased over the past years. 
+		Such sensors are typically not deployed on their own, but connected to a microcontroller capable of running algorithms and storing data, 
+		and a communication module that can send data or receive commands, using various Internet of Things protocols and data formats. 
+		Such compound systems enable the emergence of new types of “Smart-” applications in various domains (e.g., health, military, building, home, city, industry). 
+		We therefore refer to these systems using term Smart-Sensor. Unlike traditional sensors (called Basic-Sensors in the context of this paper), 
+		Smart-Sensors are multi-functional: they have the ability to be reprogrammed or reconfigured such that they can be used in multiple contexts with different algorithms.
+		To interpretation and understanding operation of Smart-Sensors, it is important to obtain information about the components of smart sensor, the micro-controller, 
+		the the smart sensor configuration, the algorithm, and a variety of other information. 
+		The joint OGC and <abbr title="World Wide Web Consortium">W3C</abbr> standard SOSA/SSN ontology describes sensors, observations, sampling, and actuation. The SOSA/SSN ontology is only able to model partially the adaptation capabilities of Smart-Sensors to different contexts.
+		The Semantic Smart Sensor Network (S3N) ontology extends SOSA/SSN ontology to model Smart-Sensors. 
+		It allows to define how to adapt the Smart-Sensor to the current context of use, 
+		that is to say selecting the algorithms to provide the right sensors outputs and the micro-controller capabilities.
+		S3N Combines the SOSA/SSN and the TD ontology and formalizes an alignment between them.</p>
+
+        <section id="SSN-TD_Alignment-namespaces" class="informative">
+            <h4 id="namespaces"><span class="secno">1.1 </span>Namespaces</h4>
+            <p>The following namespace prefixes are used throughout this document</p>
+            <table>
+                <tbody>
+                    <tr>
+                        <th> Prefix </th>
+                        <th> Namespace </th>
+                    </tr>
+                    <tr>
+                        <td> s3n: </td>
+                        <td> <a href="https://w3id.org/s3n/">https://w3id.org/s3n/</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> ssn: </td>
+                        <td> <a href="http://www.w3.org/ns/ssn/">http://www.w3.org/ns/ssn/</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> sosa: </td>
+                        <td> <a href="http://www.w3.org/ns/sosa/">http://www.w3.org/ns/sosa/</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> td: </td>
+                        <td> <a href="http://www.w3.org/ns/td#/">http://www.w3.org/ns/td#/</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+	</section>
+
+<!-- Modularization -->	
+   <section id="Modularization" class="informative">
+        <h2 id="x2-modularization"><span class="secno">2. </span>Modularization</h2>
+        <p> Ontology modularization consists of partitioning domain knowledge into modules containing different types of knowledge. 
+		Moreover, the modularization promotes the reuse of standard ontologies. 
+		S3N reuses the OGC and W3C SOSA/SSN standard and the W3C TD future standard to describe the architecture of Smart-Sensors, 
+		the algorithms they can execute and the indicator values they output, the features of these algorithms and the capabilities of the different components, 
+		and the patterns one may use to interact with the Smart-Sensors. 
+		Adopting a modularization approach by composing the ontology into several modules that use <code>owl:import</code> statements, 
+		S3N is divided in three modules that semantically describe a specific aspect of Smart-Sensors.</p><br/>
+
+        <p>
+        The <strong>S3N-Core</strong> ontology module describes the constitution of Smart-Sensors and its adaptability. It imports <i>SSN</i>. It is available at <a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore</a> using content negotiation, or directly in <a href="#S3NCore">HTML</a>, <a href="https://w3id.org/s3n/S3NCore.ttl">Turtle</a>, <a href="https://w3id.org/s3n/S3NCore.rdf">RDF/XML</a>.
+        </p> 
+        <p>
+        The <strong>S3N-Procedure</strong> ontology module describes algorithms’ features, and capabilities of a micro-controller. It imports <i>S3N-core</i> and <i>SSN-System</i>. It is available at <a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure</a> using content negotiation, or directly in <a href="#S3NProcedure">HTML</a>, <a href="https://w3id.org/s3n/S3NProcedure.ttl">Turtle</a>, <a href="https://w3id.org/s3n/S3NProcedure.rdf">RDF/XML</a>.
+        </p>
+        <p>
+        The <strong>S3N-Thing</strong> ontology module describes possible interactions with a Smart-Sensor. It imports <i>S3N-core</i> and <i>TD</i>. It is available at <a href="https://w3id.org/s3n/S3NThing">https://w3id.org/s3n/S3NThing</a> using content negotiation, or directly in <a href="#S3NThing">HTML</a>,  <a href="https://w3id.org/s3n/S3NThing.ttl">Turtle</a>, <a href="https://w3id.org/s3n/S3NThing.rdf">RDF/XML</a>.
+        </p><br/>
+
+        <p>These three modules can be imported separately or together:</p>
+        <p style="text-align: center;"> 
+        The <strong>complete S3N ontology</strong> imports the three modules above. It is available at <a href="https://w3id.org/s3n/">https://w3id.org/s3n/</a> using content negotiation, or directly in <a href="https://w3id.org/s3n/s3n.html">HTML</a>, <a href="https://w3id.org/s3n/s3n.ttl">Turtle</a>, <a href="https://w3id.org/s3n/s3n.rdf">RDF/XML</a>.
+        </p>
+
+        <br/>
+
+        <p>They are published according to the publication and metadata best practices 
+        using the [<cite><a class="bibref" href="#bib-SEAS">SEAS</a></cite>] innovative publication scheme. See the <a href="https://github.com/s3n-ontology/s3n">sources of this website with the .htaccess document on GitHub.</a></p>
+
+        <p style="text-align: center;">
+        The three modules define terms in the same namespace that is <span class="repeated" style="font-family: courier;"> https://w3id.org/s3n/</span>.
+        </p>
+        <p style="text-align: center;">
+        The suggested prefix for the S3N namespace is <span class="repeated" style="font-family: courier;">s3n</span>.<br>
+        </p>
+
+	</section>
+   
+<!-- Axiomatization -->	
+    <section id="Axiomatization" class="normative">
+        <h2 id="x3-axiomatization"><span class="secno">3. </span>Axiomatization</h2>
+        <p>This section introduces the specifications for S3N.</p>
+
+	<!-- Axiomatization_overview -->
+        <section class="informative" id="overview-of-classes-and-properties">
+            <h3 id="x3-1-overview-of-classes-and-properties"><span class="secno">3.1 </span>Overview of Classes and Properties</h3>
+            <div id="index-of-classes-and-properties">
+                <div class="azlist">
+                    <p>Classes:
+					<!-- core -->
+                        <a href="#s3nIndicator">s3n:Indicator</a> , 
+						<a href="#s3nMicroController">s3n:MicroController</a> , 
+						<a href="#s3nCommunicatingSystem">s3n:CommunicatingSystem</a> ,
+						<a href="#s3nSmartSensor">s3n:SmartSensor</a> , 
+						<a href="#s3nAlgorithm">s3n:Algorithm</a> , 
+						<a href="#s3nAlgorithmExecution">s3n:AlgorithmExecution</a> , 
+						<a href="#s3nError">s3n:Error</a> ,
+					<!-- Procedure -->						
+						<a href="#s3nMemory">s3n:Memory</a> , 
+						<a href="#s3nMaximumBandwidth">s3n:MaximumBandwidth</a> ,
+						<a href="#s3nProcedureFeature">s3n:ProcedureFeature</a> ,
+						<a href="#s3nProcedureProperty">s3n:ProcedureProperty</a> ,
+						<a href="#s3nTimeComplexity">s3n:TimeComplexity</a> ,
+						<a href="#s3nSpaceComplexity">s3n:SpaceComplexity</a> ,
+						<a href="#s3nComputationalCost">s3n:ComputationalCost</a>
+                    </p>
+                </div>
+                <div class="azlist">
+                    <p>Object Properties:
+					<!-- core -->
+                        <a href="#s3nforContext">s3n:forContext</a> , 
+						<a href="#s3nmadeAlgorithmExecution">s3n:madeAlgorithmExecution</a> , 
+						<a href="#s3ncause">s3n:cause</a> ,
+					<!-- Procedure -->
+						<a href="#s3nhasProcedureFeature">s3n:hasProcedureFeature</a> ,
+						<a href="#s3nhasProcedureProperty">ss3n:hasProcedureProperty</a> 
+					</p>
+                </div>
+            </div>
+		</section>
+		
+		<!-- S3N-Core -->
+        <section id="S3NCore">
+            <h3 id="x3-2-S3NCore"><span class="secno">3.2 </span>S3N-Core</h3>
+            <p>
+                This section introduces the specifications for the S3N-Core ontology module, that describes the constitution of Smart-Sensors and its adaptability. It imports <i>SSN</i>. It is available at <a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore</a> using content negotiation, or directly in <a href="#S3NCore">HTML</a>, <a href="https://w3id.org/s3n/S3NCore.ttl">Turtle</a>, <a href="https://w3id.org/s3n/S3NCore.rdf">RDF/XML</a>.
+            </p>
+            <section class="informative" id="S3NCore-overview">
+                <h4 id="x3-2-1-overview"><span class="secno">3.2.1 </span>Overview</h4>
+                <p>This section introduces the following classes and properties:</p>
+                <div class="azlist">
+                    <p>
+                        <a href="#s3nIndicator">s3n:Indicator</a> , 
+						<a href="#s3nMicroController">s3n:MicroController</a> , 
+						<a href="#s3nCommunicatingSystem">s3n:CommunicatingSystem</a> ,
+						<a href="#s3nSmartSensor">s3n:SmartSensor</a> , 
+						<a href="#s3nAlgorithm">s3n:Algorithm</a> , 
+						<a href="#s3nAlgorithmExecution">s3n:AlgorithmExecution</a> , 
+						<a href="#s3nError">s3n:Error</a> ,
+						<a href="#s3nforContext">s3n:forContext</a> , 
+						<a href="#s3nmadeAlgorithmExecution">s3n:madeAlgorithmExecution</a> , 
+						<a href="#s3ncause">ss3n:cause</a>
+                    </p>
+                </div>
+				<!-- <p>The following figure provides an overview of the core classes and properties that are specifically related to modeling S3N-Core.
+                    <span class="s3n">SOSA/SSN axioms are shown in green, while SSN-only axioms are shown in blue.</span>
+                </p>
+                
+				<div>
+                    <figure class="sssn" id="fig-classes-and-relationships-involved-in-observation-sosa-ssn-s3n">
+                        <a href="images/S3N-Core.png"><img alt="S3N-Core and SOSA/SSN" src="S3N-Core.png"></a>
+                        <figcaption>Figure <span class="figno">1</span> <span class="fig-title">Classes and relationships involved in S3N-Core and SOSA/SSN</span></figcaption>
+                    </figure>
+                </div> -->
+            </section>
+            <section id="S3NCore-specification">
+                <h4 id="x3-2-2-specification"><span class="secno">3.2.2 </span>Specification</h4>
+				<!-- 3.2.2.1 s3n:Indicator -->
+                <section class="specterm s3n" id="s3nIndicator" about="s3n:Indicator" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-2-2-1-s3n-Indicator"><span class="secno">3.2.2.1 </span><a href="#s3nIndicator">s3n:Indicator</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/Indicator</p> -->
+                    <p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Indicator</em> -
+                    <span property="rdfs:comment skos:definition">A specific property of a <a href="https://www.w3.org/TR/vocab-ssn/#SOSAFeatureOfInterest"><code>FeatureOfInterest</code></a>. It has a specific use in a specific domain.</span>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Example</th>
+                                <td>
+                                    <span property="skos:example"> the pedaling speed, the number of steps, the number of consumed calories.</span></td>
+                            </tr>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf"><a href="https://www.w3.org/TR/vocab-ssn/#SSNProperty">ssn:Property</a></span>
+                                </td>
+                            </tr>
+                            <tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+				   <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.2.2.2 s3n:MicroController -->
+                <section class="specterm s3n" id="s3nMicroController" about="s3n:MicroController" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-2-2-2-s3n-microcontroller"><span class="secno">3.2.2.2 </span><a href="#s3nMicroController">s3n:MicroController</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/MicroController</p> -->
+					<p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Micro-Controller</em> -
+                    <span property="rdfs:comment skos:definition">
+					is a compact integrated circuit containing a processor, some <a href="#s3nMemory"><code>Memory</code></a>, and input/output (I/O) peripherals on a single chip, 
+					and is designed to govern a specific operation in an embedded system. It implements some <a href="#s3nAlgorithm"><code>Algorithms</code></a>, 
+					and makes <a href="#s3nAlgorithmExecution"><code>AlgorithmExecutions</code></a>.
+					</span><br>
+                    <table>
+                        <tbody>
+                             <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf"><a href="https://www.w3.org/TR/vocab-ssn/#SSNSystem">ssn:System</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th class="restrictions">Restrictions</th>
+                                <td>
+                                    <span about="s3n:MicroController" rel="rdfs:subClassOf" resource="[_:S3NMicroController1]"></span>
+                                    <span about="[_:S3NMicroController1]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NMicroController1]" rel="owl:onProperty" resource="s3n:madeAlgorithmExecution"><a href="#s3nmadeAlgorithmExecution">s3n:madeAlgorithmExecution</a></span>
+                                    <span about="[_:S3NMicroController1]" property="owl:allValuesFrom" resource="s3n:AlgorithmExecution"><em><b>ONLY</b></em> <a href="#s3nAlgorithmExecution">s3n:AlgorithmExecution</a></span>
+                                    <br>
+									<span about="s3n:MicroController" rel="rdfs:subClassOf" resource="[_:S3NMicroController2]"></span>
+                                    <span about="[_:S3NMicroController2]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NMicroController2]" rel="owl:onProperty" resource="ssn:implements"><a href="https://www.w3.org/TR/vocab-ssn/#ssnimplements">ssn:implements</a></span>
+                                    <span about="[_:S3NMicroController2]" property="owl:minCardinality" content="1" datatype="xsd:nonNegativeInteger"><em><b>MIN 1</b></em></span>
+                                   </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+						<span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.2.2.3 s3n:CommunicatingSystem -->
+				<section class="specterm s3n" id="s3nCommunicatingSystem" about="s3n:CommunicatingSystem" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-2-2-3-s3n-communicatingsystem"><span class="secno">3.2.2.3 </span><a href="#s3nCommunicatingSystem">s3n:CommunicatingSystem</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/CommunicatingSystem</p> -->
+					<p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Communicating System</em> -
+                    <span property="rdfs:comment skos:definition">A CommunicatingSystem can be used to exchange information with other CommunicatingSystem on some network.</span>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf" resource="ssn:System"><a href="https://www.w3.org/TR/vocab-ssn/#SSNSystem">ssn:System</a></span>
+                                </td>
+                            </tr>
+                            <tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+						<span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.2.2.4 s3n:SmartSensor -->
+				<section class="specterm s3n" id="s3nSmartSensor" about="s3n:SmartSensor" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-2-2-4-s3n-smartsensor"><span class="secno">3.2.2.4 </span><a href="#s3nSmartSensor">s3n:SmartSensor</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/SmartSensor</p> -->
+					<p><strong>a OWL Class</strong></p>                    
+					<em property="rdfs:label">Smart-Sensor</em> -
+                    <span property="rdfs:comment skos:definition">
+					A SmartSensor is composed of one or more <a href="https://www.w3.org/TR/vocab-ssn/#SOSASensor"><code>Sensors</code></a> 
+					together with a <a href="#s3nMicroController"><code>MicroController</code></a> that implements different 
+					<a href="#s3nAlgorithm"><code>Algorithms</code></a>, 
+					and makes <a href="#s3nAlgorithmExecution"><code>Algorithm Executions</code></a> on the result of the 
+					<a href="https://www.w3.org/TR/vocab-ssn/#SOSAObservation"><code>Observations</code></a> 
+					these Sensors make to output a resulting value for some <a href="#s3nIndicator"><code>Indicator</code></a>. 
+					This value may then be communicated by some <a href="#s3nCommunicatingSystem"><code>CommunicatingSystem</code></a>CommunicatingSystem.</span>
+                    <table>
+                        <tbody>                           
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf" resource="ssn:System"><a href="https://www.w3.org/TR/vocab-ssn/#SSNSystem">ssn:System</a></span> ,
+									<span rel="rdfs:subClassOf" resource="sosa:Platform"><a href="https://www.w3.org/TR/vocab-ssn/#sosaPlatform">sosa:Platform</a></span>
+                                </td>
+                            </tr>
+                            <tr class="sssn">
+                                <th class="restrictions">Restrictions</th>
+                                <td>
+									<span about="s3n:SmartSensor" rel="rdfs:subClassOf" resource="[_:S3NSmartSensor2]"></span>
+                                    <span about="[_:S3NSmartSensor2]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NSmartSensor2]" rel="owl:onProperty" resource="ssn:hasSubSystem"><a href="https://www.w3.org/TR/vocab-ssn/#ssnhasSubSystem">ssn:hasSubSystem</a></span>
+                                    <span about="[_:S3NSmartSensor2]" property="owl:someValuesFrom" resource="sosa:Sensor"><em><b>SOME</b></em> <a href="https://www.w3.org/TR/vocab-ssn/#sosaSensor">sosa:Sensor</a></span>
+                                    <br>
+                                    <span about="s3n:SmartSensor" rel="rdfs:subClassOf" resource="[_:S3NSmartSensor3]"></span>
+                                    <span about="[_:S3NSmartSensor3]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NSmartSensor3]" rel="owl:onProperty" resource="ssn:hasSubSystem"><a href="https://www.w3.org/TR/vocab-ssn/#ssnhasSubSystem">ssn:hasSubSystem</a></span>
+                                    <span about="[_:S3NSmartSensor3]" property="owl:someValuesFrom" resource="s3n:MicroController"><em><b>SOME</b></em> <a href="#s3nMicroController">s3n:MicroController</a></span>
+                                    <br>
+                                    <span about="s3n:SmartSensor" rel="rdfs:subClassOf" resource="[_:S3NSmartSensor1]"></span>
+                                    <span about="[_:S3NSmartSensor1]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NSmartSensor1]" rel="owl:onProperty" resource="ssn:hasSubSystem"><a href="https://www.w3.org/TR/vocab-ssn/#ssnhasSubSystem">ssn:hasSubSystem</a></span>
+                                    <span about="[_:S3NSmartSensor1]" property="owl:someValuesFrom" resource="s3n:CommunicatingSystem"><em><b>SOME</b></em> <a href="#s3nCommunicatingSystem">s3n:CommunicatingSystem</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+						<span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+							
+				<!-- 3.2.2.5 s3n:Algorithm -->
+				<section class="specterm s3n" id="s3nAlgorithm" about="s3n:Algorithm" typeof="owl:Class rdfs:Class">
+                    <h5 id="x4-3-2-5-s3n-algorithm"><span class="secno">3.2.2.5 </span><a href="#s3nAlgorithm">s3n:Algorithm</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/Algorithm</p> -->
+					<p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Algorithm</em> -
+                    <span property="rdfs:comment skos:definition">A re-useable algorithm that might be executed multiple times by multiple Systems. 
+					It contains a declarative specification of the steps to be carried out to arrive at some result.
+					</span>                    
+					<table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf" resource="sosa:Procedure"><a href="https://www.w3.org/TR/vocab-ssn/#sosaProcedure">sosa:Procedure</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                                </td>
+                            </tr>
+							</tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.2.2.6 s3n:AlgorithmExecution -->
+				<section class="specterm s3n" id="s3nAlgorithmExecution" about="s3n:AlgorithmExecution" typeof="owl:Class rdfs:Class">
+                    <h5 id="x4-3-2-5-s3n-algorithmexecution"><span class="secno">3.2.2.6 </span><a href="#s3nAlgorithmExecution">s3n:AlgorithmExecution</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/AlgorithmExecution</p> -->
+					<p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Algorithm Execution</em> -
+                    <span property="rdfs:comment skos:definition">Act of executing an <a href="#s3nAlgorithm"><code>Algorithm</code></a>.</span>
+                    <table>
+                        <tbody>
+							<tr class="sssn">
+                                <th class="restrictions">Restrictions</th>
+                                <td>
+                                    <span about="s3n:AlgorithmExecution" rel="rdfs:subClassOf" resource="[_:S3NAlgorithmExecution4]"></span>
+                                    <span about="[_:S3NAlgorithmExecution4]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NAlgorithmExecution4]" rel="owl:onProperty" resource="sosa:hasResult"><a href="https://www.w3.org/TR/vocab-ssn/#sosahasResult">sosa:hasResult</a></span>
+                                    <span about="[_:S3NAlgorithmExecution4]" property="owl:minCardinality" content="1" datatype="xsd:nonNegativeInteger"><em><b>MIN 1</b></em></span>
+                                    <br>
+                                    <span about="s3n:AlgorithmExecution" rel="rdfs:subClassOf" resource="[_:S3NAlgorithmExecution2]"></span>
+                                    <span about="[_:S3NAlgorithmExecution2]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NAlgorithmExecution2]" rel="owl:onProperty" resource="sosa:usedProcedure"><a href="https://www.w3.org/TR/vocab-ssn/#sosausedProcedure">sosa:usedProcedure</a></span>
+                                    <span about="[_:S3NAlgorithmExecution2]" property="owl:allValuesFrom" resource="s3n:Algorithm"><em><b>ONLY</b></em> <a href="#s3nAlgorithm">s3n:Algorithm</a></span>
+                                    <br>
+                                    <span about="s3n:AlgorithmExecution" rel="rdfs:subClassOf" resource="[_:S3NAlgorithmExecution3]"></span>
+                                    <span about="[_:S3NAlgorithmExecution3]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NAlgorithmExecution3]" rel="owl:onProperty" resource="sosa:resultTime"><a href="https://www.w3.org/TR/vocab-ssn/#sosaresultTime">sosa:resultTime</a></span>
+                                    <span about="[_:S3NAlgorithmExecution3]" property="owl:cardinality" content="1" datatype="xsd:nonNegativeInteger"><em><b>EXACTLY 1</b></em></span>
+                                    <br>
+                                    <span about="s3n:AlgorithmExecution" rel="rdfs:subClassOf" resource="[_:S3NAlgorithmExecution1]"></span>
+                                    <span about="[_:S3NAlgorithmExecution1]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NAlgorithmExecution1]" rel="owl:onProperty" resource="sosa:hasResult"><a href="https://www.w3.org/TR/vocab-ssn/#sosahasResult">sosa:hasResult</a></span>
+                                    <span about="[_:S3NAlgorithmExecution1]" property="owl:allValuesFrom" resource="sosa:Result"><em><b>ONLY</b></em> <a href="https://www.w3.org/TR/vocab-ssn/#sosaResult">sosa:Result</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.2.2.7 s3n:Error -->
+				<section class="specterm s3n" id="s3nError" about="s3n:Error" typeof="owl:Class rdfs:Class">
+                    <h5 id="x4-3-2-5-s3n-error"><span class="secno">3.2.2.7 </span><a href="#s3nError">s3n:Error</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/Error</p> -->
+					<p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Error</em> -
+                    <span property="rdfs:comment skos:definition">
+					A specific <a href="https://www.w3.org/TR/vocab-ssn/#SOSAResult"><code>Result</code></a> that is an error. 
+					May be further described in terms of its <a href="#s3ncause"><code>Cause</code></a>.</span>
+                    <table>
+                        <tbody>
+						<tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf" resource="sosa:Result"><a href="https://www.w3.org/TR/vocab-ssn/#sosaResult">sosa:Result</a></span>
+                                </td>
+                        </tr>
+						<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                                </td>
+                        </tr>	
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>		
+				
+				<!-- 3.2.2.8 s3n:forContext -->
+                <section class="specterm s3n" id="s3nforContext" about="s3n:forContext" typeof="owl:ObjectProperty">
+                    <h5 id="x4-3-2-3-s3n-forcontext"><span class="secno">3.2.2.8 </span><a href="#s3nforContext">s3n:forContext</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/forContext</p> -->
+					<p><strong>a OWL Object Property</strong></p>
+                    <em property="rdfs:label">for context</em> -
+                    <span property="rdfs:comment skos:definition">The context of use of an <a href="#s3nlgorithm"><code>Algorithm</code></a>.</span>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Domain Includes</th>
+                                <td><span rel="schema:domainIncludes" resource="s3n:Algorithm"><a href="#s3nAlgorithm">s3n:Algorithm</a></span></td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                            </td>
+                        </tr>	
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+
+				<!-- 3.2.2.9 s3n:madeAlgorithmExecution -->
+                <section class="specterm s3n" id="s3nmadeAlgorithmExecution" about="s3n:madeAlgorithmExecution" typeof="owl:ObjectProperty">
+                    <h5 id="x4-3-2-4-s3n-madealgorithmexecution"><span class="secno">3.2.2.9 </span><a href="#s3nmadeAlgorithmExecution">s3n:madeAlgorithmExecution</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/madeAlgorithmExecution</p> -->
+					<p><strong>a OWL Object Property</strong></p>
+                    <em property="rdfs:label">made algorithm execution</em> -
+                    <span property="rdfs:comment skos:definition">Relation between a <a href="#s3nMicroController"><code>MicroController</code></a> 
+					and an <a href="#s3nAlgorithmExecution"><code>AlgorithmExecution</code></a> it made.</span> <br>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Domain Includes</th>
+                                <td><span rel="schema:domainIncludes" resource="s3n:MicroController"><a href="#s3nMicroController">s3n:MicroController</a></span>
+								</td>
+                            </tr>
+                            <tr class="sssn">
+                                <th>Range Includes</th>
+                                <td><a href="#s3nAlgorithmExecution">s3n:AlgorithmExecution</a></td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                                </td>
+							</tr>
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+
+				<!-- 3.2.2.10 ss3n:cause -->
+                <section class="specterm s3n" id="s3ncause" about="s3n:cause" typeof="owl:ObjectProperty">
+                    <h5 id="x3-2-2-10-s3n-cause"><span class="secno">3.2.2.10 </span><a href="#s3ncause">s3n:cause</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/Cause</p> -->
+					<p><strong>a OWL Object Property</strong></p>
+                    <em property="rdfs:label">cause</em> -
+                    <span property="rdfs:comment skos:definition">The cause of an <a href="#s3nError"><code>Error</code></a>.</span> <br>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Domain Includes</th>
+                                <td><span rel="schema:domainIncludes" resource="s3n:Error"><a href="#s3nError">s3n:Error</a></span></td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NCore">https://w3id.org/s3n/S3NCore/</a></span>
+                                </td>
+							</tr>
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span>
+                        <span class="back">[<a href="#S3NCore">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>	
+            </section>
+        </section>
+		
+		<!-- S3N-Procedure -->
+        <section id="S3NProcedure">
+            <h3 id="x3-3-S3NProcedure"><span class="secno">3.3 </span>S3N-Procedure</h3>
+            <p>
+                This section introduces the specifications for the S3N-Procedure ontology module, that describes algorithms’ features, and capabilities of a micro-controller. It imports <i>S3N-core</i> and <i>SSN-System</i>. It is available at <a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure</a> using content negotiation, or directly in <a href="#S3NProcedure">HTML</a>, <a href="https://w3id.org/s3n/S3NProcedure.ttl">Turtle</a>, <a href="https://w3id.org/s3n/S3NProcedure.rdf">RDF/XML</a>.
+            </p>
+            <section class="informative" id="S3NProcedure-overview">
+                <h4 id="x3-3-1-overview"><span class="secno">3.3.1 </span>Overview</h4>
+				<p>This section introduces the following classes and properties:</p>
+                <div class="azlist">
+                    <p>
+						<a href="#s3nMemory">s3n:Memory</a> , 
+						<a href="#s3nMaximumBandwidth">s3n:MaximumBandwidth</a> ,
+						<a href="#s3nProcedureFeature">s3n:ProcedureFeature</a> ,
+						<a href="#s3nProcedureProperty">s3n:ProcedureProperty</a> ,
+						<a href="#s3nTimeComplexity">s3n:TimeComplexity</a> ,
+						<a href="#s3nSpaceComplexity">s3n:SpaceComplexity</a> ,
+						<a href="#s3nComputationalCost">s3n:ComputationalCost</a> ,
+						<a href="#s3nhasProcedureFeature">s3n:hasProcedureFeature</a> ,
+						<a href="#s3nhasProcedureProperty">ss3n:hasProcedureProperty</a>
+                    </p>
+                </div>
+				
+            </section>
+            <section id="S3NProcedure-specification">
+                <h4 id="x3-3-2-specification"><span class="secno">3.3.2 </span>Specification</h4>
+				
+				<!-- 3.3.2.1 s3n:Memory -->
+                <section class="specterm s3n" id="s3nMemory" about="s3n:Memory" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-3-2-1-s3n-memory"><span class="secno">3.3.2.1 </span><a href="#s3nMemory">s3n:Memory</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/Memory</p> -->
+                    <p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Memory</em> -
+                    <span property="rdfs:comment skos:definition">The memory of the <a href="#s3nMicroController"><code>MicroController</code></a> 
+					under the defined <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMCondition"><code>Conditions</code></a>.</span>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf"><a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMSystemProperty">ssn-system:SystemProperty</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>Restrictions</th>
+                                <td>
+                                    <span about="s3n:Memory" rel="rdfs:subClassOf" resource="[_:S3NMemory1]"></span>
+                                    <span about="[_:S3NMemory1]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NMemory2]"></span>
+                                    <span about="[_:S3NMemory2]" rel="owl:inverseOf" resource="ssn-system:hasSystemProperty"><em><b>inverse Of</b></em> <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMhasSystemProperty">ssn-system:hasSystemProperty</a></span>
+                                    <span about="[_:S3NMemory1]" rel="owl:allValuesFrom" resource="[_:S3NMemory3]"><em><b>ONLY</b></em>
+									<span about="[_:S3NMemory3]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NMemory4]"></span>
+                                    <span about="[_:S3NMemory4]" rel="owl:inverseOf" resource="ssn-system:hasSystemCapability"><em><b>inverse Of</b></em> <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMhasSystemCapability">ssn-system:hasSystemCapability</a></span>
+                                    <span about="[_:S3NMemory3]" rel="owl:allValuesFrom" resource="s3n:MicroController"><em><b>ONLY</b></em> <a href="#s3nMicroController">s3n:MicroController</a></span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure/</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                  
+				   <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NProcedure">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.3.2.2 s3n:MaximumBandwidth -->
+                <section class="specterm s3n" id="s3nMaximumBandwidth" about="s3n:MaximumBandwidth" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-3-2-2-s3n-maximumbandwidth"><span class="secno">3.3.2.2 </span><a href="#s3nMaximumBandwidth">s3n:MaximumBandwidth</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/MaximumBandwidth</p> -->
+                    <p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Maximum Bandwidth</em> -
+                    <span property="rdfs:comment skos:definition">The maximal bandwidth of the <a href="#s3nCommunicatingSystem"><code>communicating</code></a> 
+					device under the defined <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMCondition"><code>Conditions</code></a>.</span>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf"><a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMSystemProperty">ssn-system:SystemProperty</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>Restrictions</th>
+                                <td>
+                                    <span about="s3n:MaximumBandwidth" rel="rdfs:subClassOf" resource="[_:S3NMaximumBandwidth1]"></span>
+                                    <span about="[_:S3NMaximumBandwidth1]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NMaximumBandwidth2]"></span>
+                                    <span about="[_:S3NMaximumBandwidth2]" rel="owl:inverseOf" resource="ssn-system:hasSystemProperty"><em><b>inverse Of</b></em> <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMhasSystemProperty">ssn-system:hasSystemProperty</a></span>
+                                    <span about="[_:S3NMaximumBandwidth1]" rel="owl:allValuesFrom" resource="[_:S3NMaximumBandwidth3]"><em><b>ONLY</b></em>
+									<span about="[_:S3NMaximumBandwidth3]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NMaximumBandwidth4]"></span>
+                                    <span about="[_:S3NMaximumBandwidth4]" rel="owl:inverseOf" resource="ssn-system:hasSystemCapability"><em><b>inverse Of</b></em> <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMhasSystemCapability">ssn-system:hasSystemCapability</a></span>
+                                    <span about="[_:S3NMaximumBandwidth3]" rel="owl:allValuesFrom" resource="s3n:CommunicatingSystem"><em><b>ONLY</b></em> <a href="#s3nCommunicatingSystem">s3n:CommunicatingSystem</a></span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure/</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                   
+				   <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NProcedure">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.3.2.3 s3n:ProcedureFeature -->
+				 <section class="specterm s3n" id="s3nProcedureFeature" about="s3n:ProcedureFeature" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-3-2-3-s3n-procedurefeature"><span class="secno">3.3.2.3 </span><a href="#s3nProcedureFeature">s3n:ProcedureFeature</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/ProcedureFeature</p> -->
+                    <p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Procedure Feature</em> -
+                    <span property="rdfs:comment skos:definition">Describes procedure properties such as the duration, 
+					computational cost, storage cost, etc. of a <a href="https://www.w3.org/TR/vocab-ssn/#sosaProcedure"><code>Procedure</code></a> under some specified <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMCondition"><code>Conditions</code></a> such as a size of input.
+					The features specified here are those that affect the Procedure executions.</span>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf"><a href="https://www.w3.org/TR/vocab-ssn/#ssnProperty">ssn:Property</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>Restrictions</th>
+                                <td>
+                                    <span about="s3n:ProcedureFeature" rel="rdfs:subClassOf" resource="[_:S3NProcedureFeature1]"></span>
+                                    <span about="[_:S3NProcedureFeature1]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NProcedureFeature2]"></span>
+                                    <span about="[_:S3NProcedureFeature2]" rel="owl:inverseOf" resource="s3n:hasProcedureFeature"><em><b>inverse Of</b></em> <a href="#s3nhasProcedureFeature">s3n:hasProcedureFeature</a></span>
+									<span about="[_:S3NProcedureFeature1]" rel="owl:allValuesFrom" resource="s3n:Algorithm"><em><b>ONLY</b></em> <a href="#s3nAlgorithm">s3n:Algorithm</a></span>
+									<br>									
+                                    <span about="s3n:ProcedureFeature" rel="rdfs:subClassOf" resource="[_:S3NProcedureFeature3]"></span>
+                                    <span about="[_:S3NProcedureFeature3]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NProcedureFeature3]" rel="owl:onProperty" resource="s3n:hasProcedureProperty"><a href="#s3nhasProcedureProperty">s3n:hasProcedureProperty</a></span>
+                                    <span about="[_:S3NProcedureFeature3]" property="owl:allValuesFrom" resource="s3n:ProcedureProperty"><em><b>ONLY</b></em> <a href="#s3nProcedureProperty">s3n:ProcedureProperty</a></span>
+                                    <br>
+									<span about="s3n:ProcedureFeature" rel="rdfs:subClassOf" resource="[_:S3NProcedureFeature4]"></span>
+                                    <span about="[_:S3NProcedureFeature4]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NProcedureFeature4]" rel="owl:onProperty" resource="ssn-system:inCondition"><a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMinCondition">ssn-system:inCondition</a></span>
+                                    <span about="[_:S3NProcedureFeature4]" property="owl:minCardinality" content="1" datatype="xsd:nonNegativeInteger"><em><b>MIN 1</b></em></span>
+									<br>
+                                    <span about="s3n:ProcedureFeature" rel="rdfs:subClassOf" resource="[_:S3NProcedureFeature5]"></span>
+                                    <span about="[_:S3NProcedureFeature5]" typeof="owl:Restriction"></span>
+                                    <span about="[_:S3NProcedureFeature5]" rel="owl:onProperty" resource="ssn-system:inCondition"><a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMinCondition">ssn-system:inCondition</a></span>
+                                    <span about="[_:S3NProcedureFeature5]" property="owl:allValuesFrom" resource="ssn-system:Condition"><em><b>ONLY</b></em> <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMCondition">ssn-system:Condition</a></span>   
+                                </td>
+                            </tr>
+                            <tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure/</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+				   <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NProcedure">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.3.2.4 s3n:ProcedureProperty -->
+				<section class="specterm s3n" id="s3nProcedureProperty" about="s3n:ProcedureProperty" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-3-2-4-s3n-procedureproperty"><span class="secno">3.3.2.4 </span><a href="#s3nProcedureProperty">s3n:ProcedureProperty</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/ProcedureProperty</p> -->
+                    <p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Procedure Property</em> -
+                    <span property="rdfs:comment skos:definition">An identifiable characteristic that represents typical characteristics of the Procedure's executions.
+					</span>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf"><a href="https://www.w3.org/TR/vocab-ssn/#ssnProperty">ssn:Property</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>Restrictions</th>
+                                <td>
+                                    <span about="s3n:ProcedureProperty" rel="rdfs:subClassOf" resource="[_:S3NProcedureProperty1]"></span>
+                                    <span about="[_:S3NProcedureProperty1]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NProcedureProperty2]"></span>
+                                    <span about="[_:S3NProcedureProperty2]" rel="owl:inverseOf" resource="s3n:hasProcedureProperty"><em><b>inverse Of</b></em> <a href="#s3nhasProcedureProperty">s3n:hasProcedureProperty</a></span>
+									<span about="[_:S3NProcedureProperty1]" rel="owl:allValuesFrom" resource="s3n:ProcedureFeature"><em><b>ONLY</b></em> <a href="#s3nProcedureFeature">s3n:ProcedureFeature</a></span>                         
+									<br>
+									<span about="s3n:ProcedureProperty" rel="rdfs:subClassOf" resource="[_:S3NProcedureProperty3]"></span>
+                                    <span about="[_:S3NProcedureProperty3]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NProcedureProperty4]"></span>
+                                    <span about="[_:S3NProcedureProperty4]" rel="owl:inverseOf" resource="s3n:hasProcedureProperty"><em><b>inverse Of</b></em> <a href="#s3nhasProcedureProperty">s3n:hasProcedureProperty</a></span>
+                                    <span about="[_:S3NProcedureProperty3]" property="owl:minCardinality" content="1" datatype="xsd:nonNegativeInteger"><em><b>MIN 1</b></em></span>									
+                                </td>
+                            </tr>
+                            <tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure/</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+				   <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NProcedure">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.3.2.5 s3n:TimeComplexity -->
+				<section class="specterm s3n" id="s3nTimeComplexity" about="s3n:TimeComplexity" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-3-2-5-s3n-timecomplexity"><span class="secno">3.3.2.5 </span><a href="#s3nTimeComplexity">s3n:TimeComplexity</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong>https://w3id.org/s3n/TimeComplexity</p> -->
+					<p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Time Complexity</em> -
+                    <span property="rdfs:comment skos:definition">The complexity in time of the <a href="https://www.w3.org/TR/vocab-ssn/#sosaProcedure"><code>Procedure</code></a> 
+					under the defined <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMCondition"><code>Conditions</code></a>.
+					</span>                    
+					<table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf" resource="s3n:ProcedureProperty"><a href="#s3nProcedureProperty">s3n:ProcedureProperty</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>Restrictions</th>
+                                <td>
+                                    <span about="s3n:TimeComplexity" rel="rdfs:subClassOf" resource="[_:S3NTimeComplexity1]"></span>
+                                    <span about="[_:S3NTimeComplexity1]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NTimeComplexity2]"></span>
+                                    <span about="[_:S3NTimeComplexity2]" rel="owl:inverseOf" resource="s3nhasProcedureProperty"><em><b>inverse Of</b></em> <a href="s3nhasProcedureProperty">s3n:hasProcedureProperty</a></span>
+                                    <span about="[_:S3NTimeComplexity1]" rel="owl:allValuesFrom" resource="[_:S3NTimeComplexity3]"><em><b>ONLY</b></em>
+									<span about="[_:S3NTimeComplexity3]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NTimeComplexity4]"></span>
+                                    <span about="[_:S3NTimeComplexity4]" rel="owl:inverseOf" resource="s3n:hasProcedureFeature"><em><b>inverse Of</b></em> <a href="s3nhasProcedureFeature">s3n:hasProcedureFeature</a></span>
+                                    <span about="[_:S3NTimeComplexity3]" rel="owl:allValuesFrom" resource="s3n:Algorithm"><em><b>ONLY</b></em> <a href="#s3nAlgorithm">s3n:Algorithm</a></span>
+                                    </span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure/</a></span>
+                                </td>
+                            </tr>
+							</tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NProcedure">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.3.2.6 s3n:SpaceComplexity -->
+				<section class="specterm s3n" id="s3nSpaceComplexity" about="s3n:SpaceComplexity" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-3-2-6-s3n-spacecomplexity"><span class="secno">3.3.2.6 </span><a href="#s3nSpaceComplexity">s3n:SpaceComplexity</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/SpaceComplexity</p> -->
+					<p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Space Complexity</em> -
+                    <span property="rdfs:comment skos:definition">The complexity in space of the <a href="https://www.w3.org/TR/vocab-ssn/#sosaProcedure"><code>Procedure</code></a> 
+					under the defined <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMCondition"><code>Conditions</code></a>.
+					</span>
+					<table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf" resource="s3n:ProcedureProperty"><a href="#s3nProcedureProperty">s3n:ProcedureProperty</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>Restrictions</th>
+                                <td>
+                                    <span about="s3n:SpaceComplexity" rel="rdfs:subClassOf" resource="[_:S3NSpaceComplexity1]"></span>
+                                    <span about="[_:S3NSpaceComplexity1]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NSpaceComplexity2]"></span>
+                                    <span about="[_:S3NSpaceComplexity2]" rel="owl:inverseOf" resource="s3nhasProcedureProperty"><em><b>inverse Of</b></em> <a href="s3nhasProcedureProperty">s3n:hasProcedureProperty</a></span>
+                                    <span about="[_:S3NSpaceComplexity1]" rel="owl:allValuesFrom" resource="[_:S3NSpaceComplexity3]"><em><b>ONLY</b></em>
+									<span about="[_:S3NSpaceComplexity3]" typeof="owl:Restriction" rel="owl:onProperty" resource="[_:S3NSpaceComplexity4]"></span>
+                                    <span about="[_:S3NSpaceComplexity4]" rel="owl:inverseOf" resource="s3n:hasProcedureFeature"><em><b>inverse Of</b></em> <a href="s3nhasProcedureFeature">s3n:hasProcedureFeature</a></span>
+                                    <span about="[_:S3NSpaceComplexity3]" rel="owl:allValuesFrom" resource="s3n:Algorithm"><em><b>ONLY</b></em> <a href="#s3nAlgorithm">s3n:Algorithm</a></span>
+                                    </span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure/</a></span>
+                                </td>
+                            </tr>
+							</tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NProcedure">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.3.2.7 s3n:ComputationalCost -->
+				<section class="specterm s3n" id="s3nComputationalCost" about="s3n:ComputationalCost" typeof="owl:Class rdfs:Class">
+                    <h5 id="x3-3-2-7-s3n-computationalcost"><span class="secno">3.3.2.7 </span><a href="#s3nComputationalCost">s3n:ComputationalCost</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/ComputationalCost</p> -->
+					<p><strong>a OWL Class</strong></p>
+                    <em property="rdfs:label">Computational Cost</em> -
+                    <span property="rdfs:comment skos:definition">The computational cost of the <a href="https://www.w3.org/TR/vocab-ssn/#sosaProcedure"><code>Procedure</code></a> 
+					under the defined <a href="https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMCondition"><code>Conditions</code></a>.
+					</span>
+					<table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub class of</th>
+                                <td>
+                                    <span rel="rdfs:subClassOf" resource="s3n:ProcedureProperty"><a href="#s3nProcedureProperty">s3n:ProcedureProperty</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure/</a></span>
+                                </td>
+                            </tr>
+							</tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NProcedure">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+				
+				<!-- 3.3.2.8 s3n:hasProcedureFeature -->
+                <section class="specterm s3n" id="s3nhasProcedureFeature" about="s3n:hasProcedureFeature" typeof="owl:ObjectProperty">
+                    <h5 id="x3-3-2-8-s3n-hasprocedurefeature"><span class="secno">3.3.2.8 </span><a href="#s3nhasProcedureFeature">s3n:hasProcedureFeature</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/hasProcedureFeature</p> -->
+					<p><strong>a OWL Object Property</strong></p>
+                    <em property="rdfs:label">has procedure feature</em> -
+                    <span property="rdfs:comment skos:definition">
+					Relation from a <a href="#sosaProcedure"><code>Procedure</code></a> to a <a href="#s3nProcedureFeature"><code>ProcedureFeature</code></a> 
+					describing the features of the Procedure under certain <a href="#SSNSYSTEMCondition"><code>Conditions</code></a>.</span> <br>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub property of</th>
+                                <td>
+                                    <span rel="rdfs:subPropertyOf" resource="ssn:hasProperty"><a href="https://www.w3.org/TR/vocab-ssn/#SSNhasProperty">ssn:hasProperty</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure/</a></span>
+                                </td>
+							</tr>
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NProcedure">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+
+				<!-- 3.3.2.9 ss3n:hasProcedureProperty -->
+                <section class="specterm s3n" id="s3nhasProcedureProperty" about="s3n:hasProcedureProperty" typeof="owl:ObjectProperty">
+                    <h5 id="x3-3-2-9-s3n-hasprocedureproperty"><span class="secno">3.3.2.9 </span><a href="#s3nhasProcedureProperty">s3n:hasProcedureProperty</a></h5>
+                    <!-- <p class="crossreference"><strong>IRI:</strong> https://w3id.org/s3n/hasProcedureProperty</p> -->
+					<p><strong>a OWL Object Property</strong></p>
+                    <em property="rdfs:label">has procedure property</em> -
+                    <span property="rdfs:comment skos:definition">
+					Relation from an <a href="#s3nProcedureFeature"><code>ProcedureFeature</code></a> of 
+					a <a href="#sosaProcedure"><code>Procedure</code></a> to a ProcedureProperty describing the features of the Procedure.</span> <br>
+                    <table>
+                        <tbody>
+                            <tr class="sssn">
+                                <th>Sub property of</th>
+                                <td>
+                                    <span rel="rdfs:subPropertyOf" resource="ssn:hasProperty"><a href="https://www.w3.org/TR/vocab-ssn/#SSNhasProperty">ssn:hasProperty</a></span>
+                                </td>
+                            </tr>
+							<tr class="sssn">
+                                <th>is Defined By</th>
+                                <td>
+                                    <span rel="rdfs:isDefinedBy"><a href="https://w3id.org/s3n/S3NProcedure">https://w3id.org/s3n/S3NProcedure/</a></span>
+                                </td>
+							</tr>
+                        </tbody>
+                    </table>
+                    <div class="buttonpanel">
+                        <span class="back">[<a href="#S3NProcedure">Back to module overview</a>]</span>
+                        <span class="back">[<a href="#overview-of-classes-and-properties">Back to top</a>]</span>
+                    </div>
+                </section>
+		</section>	
+	
+		<!-- Ontology alignment: S3N-Thing -->
+		<section id="S3NThing">
+				<h2 id="x4-S3NThing"><span class="secno">4. </span>Ontology alignment: S3N-Thing</h2>
+                <p>
+                This section introduces the specifications for the S3N Thing ontology module, that describes possible interactions with a Smart-Sensor. It imports <i>S3N-core</i> and <i>TD</i>. It is available at <a href="https://w3id.org/s3n/S3NThing">https://w3id.org/s3n/S3NThing</a> using content negotiation, or directly in <a href="#S3NThing">HTML</a>,  <a href="https://w3id.org/s3n/S3NThing.ttl">Turtle</a>, <a href="https://w3id.org/s3n/S3NThing.rdf">RDF/XML</a>.
+                </p>
+
+			<!-- Alignment between SSN and TD -->
+				<section class="informative" id="alignment-between-SSN-and-TD">
+					<h3 id="x4-1-alignment-between-SSN-and-TD"><span class="secno">4.1 </span>Alignment between SOSA/SSN and TD</h3>
+					<p>This section provides details on the alignment module that combines the new SOSA/SSN and the TD ontology and formalizes an alignment between them.</p>
+					<section id="SSN-TD-Classes-Alignment" class="informative">
+						<h4 id="x4-1-2-class-alignments"><span class="secno">4.1.2 </span>Class Alignments</h4>
+						<p>The following classes in SOSA/SSN and TD can be aligned via a subclass relation as follows. </p>
+						<table>
+							<tbody>
+								<tr>
+									<td> td:Thing</td>
+									<td> subclass of </td>
+									<td> ssn:System </td>
+								</tr>
+								<tr>
+									<td> td:InteractionPattern </td>
+									<td> subclass of </td>
+									<td> sosa:Procedure</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section id="SSN-TD_Alignment_property" class="informative">
+						<h4 id="x4-1-3-property-alignments"><span class="secno">4.1.3 </span>Property Alignments</h4>
+						<p>Additional alignments from SOSA/SSN to TD properties are defined as follows. </p>
+						<table>
+							<tbody>
+								<tr>
+									<td> td:interaction </td>
+									<td> sub-property of </td>
+									<td> ssn:implements </td>
+								</tr>
+								<tr>
+									<td> td:inputData </td>
+									<td> sub-property of </td>
+									<td> ssn:hasInput </td>
+								</tr>
+								<tr>
+									<td> td:outputData </td>
+									<td> sub-property of </td>
+									<td> ssn:hasOutput </td>
+								</tr> 
+							</tbody>
+						</table>
+					</section>
+				</section>
+			<!-- Alignment between S3NCore and TD -->
+				<section class="informative" id="alignment-between-S3NCore-and-TD">
+					<h3 id="x4-2-alignment-between-S3NCore-and-TD"><span class="secno">4.2 </span>Alignment between S3N-Core and TD</h3>
+					<p>This section provides details on the alignment module that align the module <a href="#S3NCore"><code>S3N-Core</code></a> and TD ontology.</p>
+					<section id="S3NCore-TD_Alignment-namespaces" class="informative">
+						<h4 id="x4-2-1-namespaces"><span class="secno">4.2.1 </span>Namespaces</h4>
+						<p>The following namespace prefixes are used in the alignment to S3N-Core and TD</p>
+						<table>
+							<tbody>
+								<tr>
+									<th> Prefix </th>
+									<th> Namespace </th>
+								</tr>
+								<tr>
+									<td> s3n: </td>
+									<td> <a href="https://w3id.org/s3n/">https://w3id.org/s3n/</a>
+									</td>
+								</tr>
+								<tr>
+									<td> td: </td>
+									<td> <a href="http://www.w3.org/ns/td#/">http://www.w3.org/ns/td#/</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section id="S3NCore-TD-Classes-Alignment" class="informative">
+						<h4 id="x4-2-2-class-alignments"><span class="secno">4.2.2 </span>Class Alignments</h4>
+						<p>The following classes in S3N-Core and TD can be aligned via a subclass relation as follows. </p>
+						<table>
+							<tbody>
+
+								<tr>
+									<td> s3n:SmartSensor</td>
+									<td> subclass of </td>
+									<td> td:Thing </td>
+								</tr>					
+							</tbody>
+						</table>
+					</section>
+				</section>
+		</section>
+	
+	<!-- References -->
+    <section id="references" class="appendix">
+        <h2 id="e-references"><span class="secno">A. </span>References</h2>
+            <dl class="bibliography">
+				<dt id="bib-SOSA/SSN">[SOSA/SSN]</dt>
+                <dd><a href="https://www.w3.org/TR/vocab-ssn/"><cite>Semantic Sensor Network Ontology</cite></a>. Armin Haller; Krzysztof Janowicz; Simon Cox; Danh Le Phuoc; Kerry Taylor; Maxime Lefrançois. 19 October 2017. URL: <a href="https://www.w3.org/TR/vocab-ssn/">https://www.w3.org/TR/vocab-ssn/</a>
+                </dd>
+				<dt id="bib-TD">[TD]</dt>
+                <dd><a href="https://w3c.github.io/wot-thing-description/"><cite>Web of Things (WoT) Thing Description</cite></a>. Sebastian Kaebisch; Takuki Kamiya. 18 January 2018. URL: <a href="https://w3c.github.io/wot-thing-description/">https://w3c.github.io/wot-thing-description/</a>
+                </dd>
+				<dt id="bib-SEAS">[SEAS]</dt>
+                <dd><a href="http://www.maxime-lefrancois.info/docs/Lefrancois-SIS-IoT2017-Planned.pdf"><cite>Planned ETSI SAREF Extensions based on the W3C&amp;OGC SOSA/SSN-compatible SEAS Ontology Patterns</cite></a>. Maxime Lefrançois. In Proceedings of Workshop on Semantic Interoperability and Standardization in the IoT, SIS-IoT, Amsterdam, Netherlands, July 2017. URL: <a href="http://www.maxime-lefrancois.info/docs/Lefrancois-SIS-IoT2017-Planned.pdf">http://www.maxime-lefrancois.info/docs/Lefrancois-SIS-IoT2017-Planned.pdf</a>
+                </dd>
+            </dl>
+    </section>
+  
+	<p role="navigation" id="back-to-top"><a href="#toc"><abbr title="Back to Top">↑</abbr></a></p>
+	<script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
+
+	</body>
+</html>
